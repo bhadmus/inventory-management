@@ -18,7 +18,7 @@ def register(request):
             return redirect('dashboard')
     else:
         form = UserRegisterForm()
-    return render(request, 'inventory_app/register.html', {'form': form})
+    return render(request, 'app/register.html', {'form': form})
 
 
 def user_login(request):
@@ -33,7 +33,7 @@ def user_login(request):
                 return redirect('dashboard')
     else:
         form = AuthenticationForm()
-    return render(request, 'inventory_app/login.html', {'form': form})
+    return render(request, 'app/login.html', {'form': form})
 
 
 def user_logout(request):
@@ -43,7 +43,7 @@ def user_logout(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'inventory_app/dashboard.html')
+    return render(request, 'app/dashboard.html')
 
 
 @login_required
@@ -56,29 +56,29 @@ def inventory(request):
             return redirect('inventory')
     else:
         form = InventoryForm()
-    return render(request, 'inventory_app/inventory.html', {'form': form, 'items': items})
+    return render(request, 'app/inventory.html', {'form': form, 'items': items})
 
 
 def register_view(request):
     # Implement your register logic here
-    return render(request, 'inventory_app/register.html')
+    return render(request, 'app/register.html')
 
 
 def login_view(request):
     # Implement your login logic here
-    return render(request, 'inventory_app/login.html')
+    return render(request, 'app/login.html')
 
 
 def logout_view(request):
     # Implement your logout logic here
-    return render(request, 'inventory_app/logout.html')
+    return render(request, 'app/logout.html')
 
 
 def dashboard_view(request):
     # Implement your dashboard logic here
-    return render(request, 'inventory_app/dashboard.html')
+    return render(request, 'app/dashboard.html')
 
 
-def inventory_view(request):
+def view(request):
     # Implement your inventory logic here
-    return render(request, 'inventory_app/inventory.html')
+    return render(request, 'app/inventory.html')
