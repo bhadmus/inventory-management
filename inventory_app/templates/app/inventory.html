@@ -1,6 +1,6 @@
 <!-- templates/inventory_app/inventory.html -->
 
-{% extends 'app/base.html' %}
+{% extends 'inventory_app/base.html' %}
 
 {% block content %}
 <h2>Inventory</h2>
@@ -9,10 +9,4 @@
     {{ form.as_p }}
     <button type="submit">Add Item</button>
 </form>
-<h3>Items</h3>
-<ul>
-    {% for item in items %}
-        <li>{{ item.name }} - {{ item.quantity }} - ${{ item.price }}</li>
-    {% endfor %}
-</ul>
 {% endblock %}

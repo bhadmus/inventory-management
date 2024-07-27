@@ -1,8 +1,29 @@
 <!-- templates/inventory_app/dashboard.html -->
 
-{% extends 'app/base.html' %}
+{% extends 'inventory_app/base.html' %}
 
 {% block content %}
 <h2>Dashboard</h2>
-<p>Welcome to the dashboard.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.price }}</td>
+            <td>{{ item.date | date}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

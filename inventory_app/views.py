@@ -6,7 +6,7 @@ from .forms import UserRegisterForm, InventoryForm, AuthenticationForm
 from .models import InventoryItem
 
 
-def register(request):
+def register_view(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -18,10 +18,10 @@ def register(request):
             return redirect('dashboard')
     else:
         form = UserRegisterForm()
-    return render(request, 'app/register.html', {'form': form})
+    return render(request, 'inventory_app/register.html', {'form': form})
 
 
-def user_login(request):
+def user_login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -33,22 +33,23 @@ def user_login(request):
                 return redirect('dashboard')
     else:
         form = AuthenticationForm()
-    return render(request, 'app/login.html', {'form': form})
+    return render(request, 'inventory_app/login.html', {'form': form})
 
 
-def user_logout(request):
+@login_required(login_url="login")
+def user_logout_view(request):
     logout(request)
     return redirect('login')
 
 
-@login_required
-def dashboard(request):
-    return render(request, 'app/dashboard.html')
-
-
-@login_required
-def inventory(request):
+@login_required(login_url="login")
+def dashboard_view(request):
     items = InventoryItem.objects.all()
+    return render(request, 'inventory_app/dashboard.html', {"items": items})
+
+
+@login_required(login_url="login")
+def inventory_view(request):
     if request.method == 'POST':
         form = InventoryForm(request.POST)
         if form.is_valid():
@@ -56,29 +57,9 @@ def inventory(request):
             return redirect('inventory')
     else:
         form = InventoryForm()
-    return render(request, 'app/inventory.html', {'form': form, 'items': items})
+    return render(request, 'inventory_app/inventory.html', {'form': form})
 
 
-def register_view(request):
-    # Implement your register logic here
-    return render(request, 'app/register.html')
-
-
-def login_view(request):
-    # Implement your login logic here
-    return render(request, 'app/login.html')
-
-
-def logout_view(request):
-    # Implement your logout logic here
-    return render(request, 'app/logout.html')
-
-
-def dashboard_view(request):
-    # Implement your dashboard logic here
-    return render(request, 'app/dashboard.html')
-
-
-def view(request):
+def index_view(request):
     # Implement your inventory logic here
-    return render(request, 'app/inventory.html')
+    return render(request, 'inventory_app/index.html')
